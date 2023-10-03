@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StandingService } from '../standing.service';
-import { Standing } from 'src/interfaces/Standing';
-
 
 @Component({
   selector: 'app-standing-table',
   templateUrl: './standing-table.component.html',
-  styleUrls: ['./standing-table.component.css']
+  styleUrls: ['./standing-table.component.css'],
 })
 export class StandingTableComponent implements OnInit {
+  standings: Standing[] = [];
+  leagueId!: string;
 
-  standings: Standing [] = [];
-  leagueId!: string ;
-
-  constructor(private route: ActivatedRoute, private standingService: StandingService) {
+  constructor(
+    private route: ActivatedRoute,
+    private standingService: StandingService
+  ) {
     this.standings = [];
     this.leagueId = '';
   }
-  
+
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.leagueId = data['leagueId'];
