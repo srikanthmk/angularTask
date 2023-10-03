@@ -24,10 +24,15 @@ export class TeamHistoryComponent implements OnInit {
     });
   }
   getTeamHistory() {
-    this.standingService.getTeamsLastPlayed(this.teamId).subscribe((data) => {
-      console.log(data);
-      this.fixtureResponse = data;
-    });
+    this.standingService.getTeamsLastPlayed(this.teamId).subscribe(
+      (data) => {
+        console.log(data);
+        this.fixtureResponse = data;
+      },
+      (error) => {
+        console.error('An error occurred:', error);
+      }
+    );
   }
   goBack() {
     this.location.back();

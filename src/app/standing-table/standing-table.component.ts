@@ -29,11 +29,16 @@ export class StandingTableComponent implements OnInit {
 
   loadStandings() {
     if (this.leagueId) {
-      this.standingService.getStandings(this.leagueId).subscribe((data) => {
-        this.standings = data.response[0].league.standings[0];
-        this.standings.sort((a, b) => b.points - a.points);
-        this.standings = this.standings.slice(0, 10);
-      });
+      this.standingService.getStandings(this.leagueId).subscribe(
+        (data) => {
+          this.standings = data.response[0].league.standings[0];
+          this.standings.sort((a, b) => b.points - a.points);
+          this.standings = this.standings.slice(0, 10);
+        },
+        (error) => {
+          console.error('An error occurred:', error);
+        }
+      );
     }
   }
 }
